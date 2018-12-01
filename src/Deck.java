@@ -7,7 +7,7 @@ public class Deck {
     public Deck(boolean joker) {
         myDeck = new ArrayList<Card>();
         String[] suits = {"Diamonds", "Hearts", "Spades", "Clubs"};
-        String[] numbers = {"1", "2", "3", "4", "5","6","7","8","9","10","Jack","Queen","King"};
+        int[] numbers = {1,2,3,4,5,6,7,8,9,10,11,12,13,14};
 
         for (int i =0; i < suits.length; i++) {
             
@@ -20,7 +20,7 @@ public class Deck {
 
         int i = 0;
         while (joker && i < 4) {
-            Card myCard = new Card("N/A", "Joker");
+            Card myCard = new Card("N/A", 0);
             myDeck.add(myCard);
             i += 1;
         }
