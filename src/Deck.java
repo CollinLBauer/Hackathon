@@ -4,41 +4,53 @@ import java.util.Random;
 public class Deck {
     protected ArrayList<Card> myDeck;
 
+    /* Deck constructor; creates a standard deck of cards
+     * Accepts a boolean as an argument, which specifies whether the deck has jokers.
+     * Creates cards Ace through King in each of the four sets,
+     *   and adds them to the deck.
+     * If the deck has jokers, it adds two jokers.
+     */
     public Deck(boolean joker) {
         myDeck = new ArrayList<Card>();
         String[] suits = {"Diamonds", "Hearts", "Spades", "Clubs"};
-        int[] numbers = {1,2,3,4,5,6,7,8,9,10,11,12,13,14};
 
         for (int i =0; i < suits.length; i++) {
             
-            for (int j = 0; j < numbers.length; j ++) { 
-                Card myCard = new Card(suits[i],numbers[j]);
+            for (int j = 1; j < 14; j ++) {
+                Card myCard = new Card(suits[i],j);
                 myDeck.add(myCard);
             }
 
         }
 
         int i = 0;
-        while (joker && i < 4) {
+        while (joker && i < 2) {
             Card myCard = new Card("N/A", 0);
             myDeck.add(myCard);
             i += 1;
         }
-                
     }
 
+    /* Deck constructor, creates an arbitrary deck of cards
+     * Accepts an ArrayList<Card> as an argument
+     * This is primarily used by the Deck.split method, but may be
+     *   used to convert other Class types to a deck.
+     */
     public Deck(ArrayList<Card> arrList) {
-        myDeck = new ArrayList<Card>();
-        int setSize = arrList.size()/2;
-        for (int i = 0; i < setSize; i++) {
-            Card temp = arrList.get(0);
-            arrList.remove(0);
-            myDeck.add(temp);
-        }
+        myDeck = arrList;
     }
 
+    /* Removes the top half of a deck and returns it as a new deck
+     *
+     */
     public Deck split() {
-        return new Deck(myDeck);
+        int halfSize = myDeck.size()/2;
+        ArrayList<Card> halfDeck = new ArrayList<Card>();
+        for (int i = 0; i < halfSize; i++){
+            halfDeck.add(this.getTopCard());
+        }
+
+        return new Deck(halfDeck);
     }
 
     public String toString() {
@@ -75,13 +87,13 @@ public class Deck {
 
     public static void main(String[] args) {
         Deck jokerDeck = new Deck(true);
+
+
+        //jokerDeck.shuffle();
         //System.out.println(jokerDeck);
 
-        jokerDeck.shuffle();
-        //System.out.println(jokerDeck);
-
-        Deck otherDeck = new Deck(jokerDeck.myDeck);
+        Deck splitDeck = jokerDeck.split();
         System.out.println(jokerDeck);
-        System.out.println("\n\n\n" + otherDeck);
+        System.out.println("\n-----------------------\n" + splitDeck);
     }
 }
