@@ -15,6 +15,10 @@ public class Card implements Comparable{
         return number;
     }
 
+    public int compareTo(Object o){
+        return -1;
+    }
+
     public String toString() {
         return "Number: " + number + "\nSuit: " + suit;
     }
