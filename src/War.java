@@ -12,12 +12,12 @@ public class War{
 
         Deck player1 = new Deck(false);
         player1.shuffle();
-        Deck player2 = warDeck.split();
+        Deck player2 = player1.split();
 
         // debug prints
         System.out.println("Decks created successfully. Checking their contents below...\n");
-        System.out.printf("----------------\nPlayer 1's deck...%s\n\n",player1.toString());
-        System.out.printf("----------------\nPlayer 1's deck...%s\n\n",player2.toString());
+        System.out.printf("----------------\nPlayer 1's deck...\n%s\n\n",player1.toString());
+        System.out.printf("----------------\nPlayer 1's deck...\n%s\n\n",player2.toString());
 
     }
 }
