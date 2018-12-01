@@ -29,7 +29,8 @@ public class Deck {
 
     public Deck(ArrayList<Card> arrList) {
         myDeck = new ArrayList<Card>();
-        for (int i = 0; i < arrList.size()/2; i++) {
+        int setSize = arrList.size()/2;
+        for (int i = 0; i < setSize; i++) {
             Card temp = arrList.get(0);
             arrList.remove(0);
             myDeck.add(temp);
