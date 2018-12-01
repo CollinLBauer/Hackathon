@@ -16,8 +16,8 @@ public class War{
 
         // debug prints
         System.out.println("Decks created successfully. Checking their contents below...\n");
-        System.out.printf("Player 1's deck...%s\n\n",player1.toString());
-        System.out.printf("Player 1's deck...%s\n\n",player2.toString());
+        System.out.printf("----------------\nPlayer 1's deck...%s\n\n",player1.toString());
+        System.out.printf("----------------\nPlayer 1's deck...%s\n\n",player2.toString());
 
     }
 }
