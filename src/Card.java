@@ -1,4 +1,4 @@
-public class Card implements Comparable{
+public class Card{
     private String suit;
     private String number;
 
@@ -15,15 +15,12 @@ public class Card implements Comparable{
         return number;
     }
 
-    public int compareTo(Object o){
-        return -1;
-    }
-
     public String toString() {
         return "Number: " + number + "\nSuit: " + suit;
     }
+
     public static void main(String[] args) {
-        Card king = new Card("Diamonds", "K");
+        Card king = new Card("Diamonds", "King");
         System.out.println(king);
     }
 }

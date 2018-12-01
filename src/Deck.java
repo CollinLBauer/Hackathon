@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Deck {
-    private ArrayList<Card> myDeck;
+    protected ArrayList<Card> myDeck;
 
     public Deck(boolean joker) {
         myDeck = new ArrayList<Card>();
@@ -27,6 +27,19 @@ public class Deck {
                 
     }
 
+    public Deck(ArrayList<Card> arrList) {
+        myDeck = new ArrayList<Card>();
+        for (int i = 0; i < arrList.size()/2; i++) {
+            Card temp = arrList.get(0);
+            arrList.remove(0);
+            myDeck.add(temp);
+        }
+    }
+
+    public Deck split() {
+        return new Deck(myDeck);
+    }
+
     public String toString() {
         String theString = "";
         for (int i = 0; i < myDeck.size() - 1; i++) {
@@ -35,6 +48,12 @@ public class Deck {
         theString += myDeck.get(myDeck.size() - 1);
 
         return theString;
+    }
+
+    public Card getTopCard() {
+        Card temp = myDeck.get(0);
+        myDeck.remove(0);
+        return temp;
     }
 
     public void shuffle() {
@@ -55,9 +74,13 @@ public class Deck {
 
     public static void main(String[] args) {
         Deck jokerDeck = new Deck(true);
-        System.out.println(jokerDeck);
+        //System.out.println(jokerDeck);
 
         jokerDeck.shuffle();
+        //System.out.println(jokerDeck);
+
+        Deck otherDeck = new Deck(jokerDeck.myDeck);
         System.out.println(jokerDeck);
+        System.out.println("\n\n\n" + otherDeck);
     }
 }
