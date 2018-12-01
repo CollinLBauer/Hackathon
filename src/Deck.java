@@ -40,9 +40,15 @@ public class Deck {
         myDeck = arrList;
     }
 
-    /* Removes the top half of a deck and returns it as a new deck
-     *
+    /* Deck constructor, creates an empty deck
+     * Default constructor with no arguments
      */
+    public Deck(){
+        myDeck = new ArrayList<Card>();
+    }
+
+
+    // Removes the top half of a deck and returns it as a new deck
     public Deck split() {
         int halfSize = myDeck.size()/2;
         ArrayList<Card> halfDeck = new ArrayList<Card>();
@@ -53,6 +59,7 @@ public class Deck {
         return new Deck(halfDeck);
     }
 
+    // returns the string representation of the deck
     public String toString() {
         String theString = "";
         for (int i = 0; i < myDeck.size() - 1; i++) {
@@ -63,12 +70,27 @@ public class Deck {
         return theString;
     }
 
+    // removes and returns the top card of the deck
     public Card getTopCard() {
         Card temp = myDeck.get(0);
         myDeck.remove(0);
         return temp;
     }
 
+    // returns the size of a deck
+    public int getSize() {
+        return myDeck.size();
+    }
+
+
+    // adds a card to the top of the deck
+    public void addCard(Card newCard) {
+        myDeck.add(newCard);
+    }
+
+
+
+    // shuffles the deck
     public void shuffle() {
         Random rand = new Random();
         for (int i = 0; i < myDeck.size(); i++) {
