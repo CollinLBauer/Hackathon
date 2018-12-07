@@ -13,8 +13,8 @@ public class War{
     private static void compareCards(Deck deck1, Deck deck2,
                                                 Deck discard1, Deck discard2,
                                                 ArrayList<Card> pile){
-        Card card1 = deck1.getTopCard();
-        Card card2 = deck2.getTopCard();
+        StdCard card1 = (StdCard) deck1.getTopCard();
+        StdCard card2 = (StdCard) deck2.getTopCard();
         System.out.printf("Comparing %s to %s\n",card1.toString(),card2.toString());
 
         pile.add(card1);
@@ -43,7 +43,7 @@ public class War{
         System.out.println("Let's play war!\n");
 
         // initialize decks
-        Deck player1 = new Deck(false);
+        Deck player1 = new StdDeck(false);
         player1.shuffle();
         Deck player2 = player1.split();
 

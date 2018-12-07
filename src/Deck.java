@@ -1,34 +1,15 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Deck {
+public class Deck implements Comparable{
     protected ArrayList<Card> myDeck;
 
-    /* Deck constructor; creates a standard deck of cards
-     * Accepts a boolean as an argument, which specifies whether the deck has jokers.
-     * Creates cards Ace through King in each of the four sets,
-     *   and adds them to the deck.
-     * If the deck has jokers, it adds two jokers.
+    /* Deck constructor, creates an empty deck
+     * Default constructor with no arguments
+     * Accepts any Card objects in the array
      */
-    public Deck(boolean joker) {
+    public Deck(){
         myDeck = new ArrayList<Card>();
-        String[] suits = {"Diamonds", "Hearts", "Spades", "Clubs"};
-
-        for (int i =0; i < suits.length; i++) {
-            
-            for (int j = 1; j < 14; j ++) {
-                Card myCard = new Card(suits[i],j);
-                myDeck.add(myCard);
-            }
-
-        }
-
-        int i = 0;
-        while (joker && i < 2) {
-            Card myCard = new Card("N/A", 0);
-            myDeck.add(myCard);
-            i += 1;
-        }
     }
 
     /* Deck constructor, creates an arbitrary deck of cards
@@ -40,34 +21,14 @@ public class Deck {
         myDeck = arrList;
     }
 
-    /* Deck constructor, creates an empty deck
-     * Default constructor with no arguments
-     */
-    public Deck(){
-        myDeck = new ArrayList<Card>();
+    // returns the size of a deck
+    public int getSize() {
+        return myDeck.size();
     }
 
-
-    // Removes the top half of a deck and returns it as a new deck
-    public Deck split() {
-        int halfSize = myDeck.size()/2;
-        ArrayList<Card> halfDeck = new ArrayList<Card>();
-        for (int i = 0; i < halfSize; i++){
-            halfDeck.add(this.getTopCard());
-        }
-
-        return new Deck(halfDeck);
-    }
-
-    // returns the string representation of the deck
-    public String toString() {
-        String theString = "";
-        for (int i = 0; i < myDeck.size() - 1; i++) {
-            theString += myDeck.get(i) + "\n\n";
-        }
-        theString += myDeck.get(myDeck.size() - 1);
-
-        return theString;
+    // adds a card to the top of the deck
+    public void addCard(Card newCard) {
+        myDeck.add(newCard);
     }
 
     // removes and returns the top card of the deck
@@ -76,18 +37,6 @@ public class Deck {
         myDeck.remove(0);
         return temp;
     }
-
-    // returns the size of a deck
-    public int getSize() {
-        return myDeck.size();
-    }
-
-
-    // adds a card to the top of the deck
-    public void addCard(Card newCard) {
-        myDeck.add(newCard);
-    }
-
 
 
     // shuffles the deck
@@ -107,15 +56,42 @@ public class Deck {
         }
     }
 
-    public static void main(String[] args) {
-        Deck jokerDeck = new Deck(true);
+    // Removes the top half of a deck and returns it as a new deck
+    public Deck split() {
+        int halfSize = myDeck.size()/2;
+        ArrayList<Card> halfDeck = new ArrayList<Card>();
+        for (int i = 0; i < halfSize; i++){
+            halfDeck.add(this.getTopCard());
+        }
+
+        return new Deck(halfDeck);
+    }
+
+    // returns the string representation of the deck
+    public String toString() {
+        String rtnStr = "";
+        for (int i = 0; i < myDeck.size() - 1; i++) {
+            rtnStr += myDeck.get(i) + "\n\n";
+        }
+        rtnStr += myDeck.get(myDeck.size() - 1);
+
+        return rtnStr;
+    }
 
 
-        //jokerDeck.shuffle();
-        //System.out.println(jokerDeck);
 
-        Deck splitDeck = jokerDeck.split();
-        System.out.println(jokerDeck);
-        System.out.println("\n-----------------------\n" + splitDeck);
+    /* compareTo method
+     * returns the difference in size of two decks
+     */
+    public int compareTo(Object otherDeck) {
+        if (otherDeck instanceof Deck) {
+            Deck temp = (Deck) otherDeck;
+            return myDeck.size() - temp.getSize();
+        }
+        else{
+            System.out.println("Warning: not of same type");
+            return 0;
+        }
+
     }
 }
